@@ -44,12 +44,12 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
-        //
+        return view('admin.customers.show', compact('customer'));
     }
 
     /**
