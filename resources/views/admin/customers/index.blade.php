@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="d-flex justify-content-end mb-2">
+            <a class="btn btn-success" href="#">Nuovo cliente</a>
+        </div>
         <div class="row">
             @forelse ($customers as $customer)
                 <div class="col-6 py-2">
