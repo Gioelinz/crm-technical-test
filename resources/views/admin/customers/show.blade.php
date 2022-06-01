@@ -16,7 +16,13 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Cliente: <span class="font-weight-bold">{{ $customer->name }}</span>
+                        <h4 class="card-title d-flex justify-content-between"> <span>Cliente:
+                                <b>{{ $customer->name }}</b></span>
+                            <div class="controls">
+                                <a href="{{ route('admin.customers.edit', $customer) }}"
+                                    class="btn btn-sm btn-warning mr-2"><i class="fa-solid fa-pencil"></i></a>
+                                @include('includes.modal-confirm')
+                            </div>
                         </h4>
                         <hr>
                         <p class="card-text">
@@ -45,6 +51,9 @@
             </div>
         </div>
         <div class="row">
+
+            {{-- OFFERTE --}}
+
             <div class="col-6 mt-5">
                 <div class="card">
                     <div class="card-body">
@@ -162,6 +171,50 @@
                     </div>
                 </div>
             </div>
+
+            {{-- FILES --}}
+
+            <div class="col-6 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between">
+                            <span class="h4 mb-0">Immagini/Documenti</span>
+                            <form action="{{ route('admin.files.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" value="{{ $customer->id }}" name="customer_id">
+                                <label for="file" title="Carica file" class="btn btn-sm btn-primary mb-0"><i
+                                        class="fa-solid fa-cloud-arrow-up"></i></label>
+                                <input class="d-none" type="file" name="file" id="file" onchange="form.submit()">
+                            </form>
+                        </h5>
+                        <div class="card-text mt-3">
+                            <hr>
+                            <div class="d-flex flex-wrap">
+                                @forelse($customer->files as $file)
+                                    <div class="d-flex flex-column p-2">
+                                        <a href="{{ asset('storage/' . $file->file) }}" target="_blank">
+                                            @if (pathinfo($file->file, PATHINFO_EXTENSION) == 'pdf')
+                                                <img src="https://icon-library.com/images/pdf-icon/pdf-icon-11.jpg"
+                                                    alt="Allegato {{ $file->id }}" width="100" height="100">
+                                            @else
+                                                <img src="{{ asset('storage/' . $file->file) }}"
+                                                    alt="Allegato {{ $file->id }}" width="100" height="100">
+                                            @endif
+                                        </a>
+                                        <form action="{{ route('admin.files.destroy', $file) }}" method="post">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-danger w-100"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                @empty
+                                    <h5 class="mb-0">Non ci sono file caricati</h5>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection

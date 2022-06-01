@@ -20,6 +20,11 @@ class Customer extends Model
         return $this->hasMany('App\Models\Offer');
     }
 
+    public function files()
+    {
+        return $this->hasMany('App\Models\File');
+    }
+
     public function tags()
     {
         return $this->belongsToMany('App\Models\Tag');

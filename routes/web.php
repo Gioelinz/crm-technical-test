@@ -26,5 +26,6 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index');
         Route::resource('/customers/offers', 'OfferController');
+        Route::resource('/customers/files', 'FileController');
         Route::resource('/customers', 'CustomerController');
     });
