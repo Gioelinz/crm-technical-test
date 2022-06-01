@@ -129,11 +129,15 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        //
+        if (count($customer->tags)) $customer->tags()->detach();
+
+        $customer->delete();
+
+        return redirect()->route('admin.customers.index')->with('message', "Il cliente $customer->name è stato eliminato");
     }
 }

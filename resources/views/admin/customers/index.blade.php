@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="d-flex justify-content-end mb-2">
             <a class="btn btn-success" href="{{ route('admin.customers.create') }}">Nuovo cliente</a>
         </div>
@@ -30,7 +35,7 @@
                             <div class="controls">
                                 <a href="{{ route('admin.customers.edit', $customer) }}"
                                     class="btn btn-sm btn-warning mr-2"><i class="fa-solid fa-pencil"></i></a>
-                                <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                @include('includes.modal-confirm')
                             </div>
                         </div>
                     </div>
