@@ -47,8 +47,12 @@ body {
   height: 100vh;
   background-image: url(https://soak.co/wp-content/uploads/2019/01/blue-background.jpg);
   background-size: cover;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   .card {
     background-color: #293a4e;
+    label {
+      font-size: 1.1rem;
+    }
     .form-control {
       border-color: rgb(26, 14, 14);
     }
