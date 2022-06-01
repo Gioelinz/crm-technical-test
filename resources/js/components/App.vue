@@ -2,7 +2,7 @@
   <div class="container h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-md-10">
-        <div class="card text-white">
+        <div class="card shadow text-white">
           <div class="content">
             <h2>My Agency</h2>
             <h2>My Agency</h2>
@@ -12,28 +12,25 @@
           </div>
 
           <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleFormControlInput1">La tua email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="name@example.com"
-                />
-              </div>
+            <div class="form-group">
+              <label for="email">La tua email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="name@example.com"
+              />
+            </div>
 
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1"
-                  >Descrivi la tua richiesta</label
-                >
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="3"
-                ></textarea>
-              </div>
-            </form>
+            <div class="form-group">
+              <label for="description">Descrivi la tua richiesta</label>
+              <textarea
+                class="form-control"
+                id="description"
+                rows="3"
+              ></textarea>
+            </div>
+            <button class="form-button">Invia</button>
           </div>
         </div>
       </div>
@@ -55,6 +52,37 @@ body {
     .form-control {
       border-color: rgb(26, 14, 14);
     }
+    .form-button {
+      background-color: #03a9f4;
+      font-size: 1.1rem;
+      border: 0;
+      border-radius: 50px;
+      padding: 8px 22px;
+      transition: all 0.4s;
+
+      &:hover {
+        background-color: rgb(14, 4, 106);
+        color: white;
+        /* transform: scale(1.2); */
+        animation: pulsate 0.5s ease-in-out 2 both;
+      }
+    }
+  }
+}
+/* Animazione bottone */
+
+@keyframes pulsate {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 
