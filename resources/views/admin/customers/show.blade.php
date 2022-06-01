@@ -55,12 +55,12 @@
                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
                                 data-target="#offermodal"><i class="fa-solid fa-plus"></i></button>
 
-                            <div class="modal fade" id="offermodal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            <div class="modal fade" id="offermodal" tabindex="-1" aria-labelledby="createOffer"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Invia offerta</h5>
+                                            <h5 class="modal-title" id="createOffer">Invia offerta</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -103,6 +103,8 @@
                             @forelse($customer->offers as $offer)
                                 <div class="d-flex justify-content-between align-items-center">
 
+                                    {{-- Dropdown eliminazione --}}
+
                                     <div class="dropdown">
                                         <a href="#" class="h5 mb-0 text-dark text-decoration-none dropdown-toggle"
                                             role="button" id="dropdownMenuButton-{{ $offer->id }}"
@@ -130,9 +132,8 @@
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="offer-{{ $offer->id }}" data-backdrop="static"
-                                    data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="offer-{{ $offer->id }}" data-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
