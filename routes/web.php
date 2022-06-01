@@ -25,5 +25,6 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
         Route::get('/', 'HomeController@index');
+        Route::resource('/customers/offers', 'OfferController');
         Route::resource('/customers', 'CustomerController');
     });

@@ -26,6 +26,14 @@
                             <p class="card-text"><i class="fa-solid fa-phone"></i> {{ $customer->telephone }}</p>
                             <p class="card-text"><i class="fa-solid fa-note-sticky"></i> VAT/P.IVA:
                                 {{ $customer->vat }}</p>
+
+                            @forelse($customer->tags as $tag)
+                                <h5 @if ($loop->last) class="mb-0" @endif><span
+                                        class="badge badge-{{ $tag->color }}">{{ $tag->label }}</span></h5>
+                            @empty
+                                <h5 class="mb-0"><span class="badge badge-secondary">Nessuna nota</span></h5>
+                            @endforelse
+
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <div class="show">
