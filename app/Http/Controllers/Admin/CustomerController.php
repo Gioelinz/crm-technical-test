@@ -75,7 +75,9 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('admin.customers.show', compact('customer'));
+        $tags = Tag::all();
+        $current_tags = $customer->tags()->pluck('id')->toArray();
+        return view('admin.customers.show', compact('customer', 'tags', 'current_tags'));
     }
 
     /**
@@ -139,5 +141,16 @@ class CustomerController extends Controller
         $customer->delete();
 
         return redirect()->route('admin.customers.index')->with('message', "Il cliente $customer->name è stato eliminato");
+    }
+
+    public function updateTags(Request $request, Customer $customer)
+    {
+
+        $data = $request->all();
+
+        if (array_key_exists('tags', $data)) $customer->tags()->sync($data['tags']);
+        else $customer->tags()->detach();
+
+        return redirect()->route('admin.customers.show', $customer)->with('message', "Note modificate con successo");
     }
 }

@@ -36,15 +36,63 @@
                         </ul>
                         </p>
                         <hr>
-                        <p class="card-text">
-                            <span class="h5">Note/Status</span>
+                        <div class="card-text">
+                            <div class="mb-3">
+                                <span class="h5">Note/Status</span>
+
+
+                                <!-- Button modale Note -->
+                                <button type="button" class="btn btn-sm btn-primary ml-1" data-toggle="modal"
+                                    data-target="#notesModal">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+
+                            <!-- Modale Note -->
+                            <div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tipologia cliente</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('admin.customers.updatetags', $customer) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <div class="modal-body">
+                                                @foreach ($tags as $tag)
+                                                    <div class="custom-control custom-switch mb-5 mt-4">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="tag-input-{{ $tag->id }}" value="{{ $tag->id }}"
+                                                            name="tags[]" @if (in_array($tag->id, old('tags', $current_tags ?? []))) checked @endif>
+                                                        <label class="custom-control-label mr-5 h5"
+                                                            for="tag-input-{{ $tag->id }}"><span
+                                                                class="badge badge-{{ $tag->color }}">{{ $tag->label }}</span></label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Chiudi</button>
+                                                <button type="submit" class="btn btn-primary">Salva</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             @forelse($customer->tags as $tag)
                                 <h4><span class="badge badge-{{ $tag->color }}">{{ $tag->label }}</span></h4>
                             @empty
                                 <h5><span class="badge badge-secondary">Nessuna</span></h5>
                             @endforelse
 
-                        </p>
+                        </div>
 
                     </div>
                 </div>

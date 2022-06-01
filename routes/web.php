@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+
+Auth::routes(['register' => false]);
 
 Route::middleware('auth')
     ->namespace('Admin')
@@ -27,5 +25,10 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index');
         Route::resource('/customers/offers', 'OfferController');
         Route::resource('/customers/files', 'FileController');
+        Route::put('/customers/updatetags/{customer}', 'CustomerController@updateTags')->name('customers.updatetags');
         Route::resource('/customers', 'CustomerController');
     });
+
+Route::get('{any?}', function () {
+    return view('guests.home');
+})->where('any', '.*');

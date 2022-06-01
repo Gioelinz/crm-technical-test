@@ -14,10 +14,13 @@
                             </div>
                         @endif
 
-                        {{ __('You are logged in!') }}
+                        Benvenuto {{ auth()->user()->name }}
                         <div class="mt-2">
-                            <a href="{{ route('admin.customers.index') }}" class="btn btn-primary">Guarda i tuoi
+                            <a href="{{ route('admin.customers.index') }}" class="btn btn-primary">I tuoi
                                 clienti</a>
+                            <a href="#" class="btn btn-primary">
+                                Preventivi <span class="badge badge-light">4</span>
+                            </a>
                         </div>
                     </div>
                 </div>
