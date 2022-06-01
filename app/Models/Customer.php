@@ -7,11 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $fillable = [
-        'user_id', 'email', 'telephone', 'vat'
+        'user_id', 'name', 'email', 'telephone', 'vat'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function offers()
+    {
+        return $this->hasMany('App\Models\Offer');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
     }
 }

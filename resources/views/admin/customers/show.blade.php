@@ -21,5 +21,10 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-4 mt-5">
+                <h4>Offerte</h4>
+            </div>
+        </div>
     </div>
 @endsection
