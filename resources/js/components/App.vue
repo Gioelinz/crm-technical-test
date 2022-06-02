@@ -1,41 +1,46 @@
 <template>
-  <div class="container h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-md-10">
-        <div class="card shadow text-white">
-          <div class="content">
-            <h2>My Agency</h2>
-            <h2>My Agency</h2>
-          </div>
-          <div class="card-header">
-            <h4 class="mb-0">Chiedi qui il tuo preventivo</h4>
-          </div>
-
-          <div class="card-body">
-            <div class="form-group">
-              <label for="email">La tua email</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="name@example.com"
-              />
+  <section class="h-100">
+    <a class="text-decoration-none admin" href="/admin"
+      ><i class="fa-solid fa-user fa-2x"></i
+    ></a>
+    <div class="container h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-md-10">
+          <div class="card shadow text-white">
+            <div class="content">
+              <h2>My Agency</h2>
+              <h2>My Agency</h2>
+            </div>
+            <div class="card-header">
+              <h4 class="mb-0">Chiedi qui il tuo preventivo</h4>
             </div>
 
-            <div class="form-group">
-              <label for="description">Descrivi la tua richiesta</label>
-              <textarea
-                class="form-control"
-                id="description"
-                rows="3"
-              ></textarea>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="email">La tua email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="description">Descrivi la tua richiesta</label>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                ></textarea>
+              </div>
+              <button class="form-button">Invia</button>
             </div>
-            <button class="form-button">Invia</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -48,6 +53,11 @@ body {
   background-image: url(https://soak.co/wp-content/uploads/2019/01/blue-background.jpg);
   background-size: cover;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  .admin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
   .card {
     background-color: #293a4e;
     label {

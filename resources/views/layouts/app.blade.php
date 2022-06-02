@@ -43,7 +43,9 @@
                         <li class="nav-item"><a
                                 class="nav-link {{ request()->routeIs('admin.customers*') ? 'active' : '' }} "
                                 href="{{ route('admin.customers.index') }}">Clienti</a> </li>
-                        <li class="nav-item"><a class="nav-link" href="">Preventivi</a> </li>
+                        <li class="nav-item"><a
+                                class="nav-link {{ request()->routeIs('admin.quotes*') ? 'active' : '' }}"
+                                href="{{ route('admin.quotes.index') }}">Preventivi</a> </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -68,7 +70,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

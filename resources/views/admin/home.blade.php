@@ -18,8 +18,8 @@
                         <div class="mt-2">
                             <a href="{{ route('admin.customers.index') }}" class="btn btn-primary">I tuoi
                                 clienti</a>
-                            <a href="#" class="btn btn-primary">
-                                Preventivi <span class="badge badge-light">4</span>
+                            <a href="{{ route('admin.quotes.index') }}" class="btn btn-primary">
+                                Preventivi <span class="badge badge-light">{{ $quotes_count }}</span>
                             </a>
                         </div>
                     </div>

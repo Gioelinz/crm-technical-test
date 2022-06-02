@@ -27,6 +27,7 @@ Route::middleware('auth')
         Route::resource('/customers/files', 'FileController');
         Route::put('/customers/updatetags/{customer}', 'CustomerController@updateTags')->name('customers.updatetags');
         Route::resource('/customers', 'CustomerController');
+        Route::resource('/quotes', 'QuoteController');
     });
 
 Route::get('{any?}', function () {
