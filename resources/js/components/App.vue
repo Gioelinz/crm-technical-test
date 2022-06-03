@@ -16,25 +16,60 @@
             </div>
 
             <div class="card-body">
-              <div class="form-group">
-                <label for="email">La tua email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="name@example.com"
-                />
-              </div>
+              <!-- Alert -->
 
-              <div class="form-group">
-                <label for="description">Descrivi la tua richiesta</label>
-                <textarea
-                  class="form-control"
-                  id="description"
-                  rows="3"
-                ></textarea>
+              <div
+                v-if="hasErrors || successAlert"
+                class="alert text-center my-3 mx-auto"
+                :class="hasErrors ? 'alert-danger' : 'alert-success'"
+                role="alert"
+              >
+                <div v-if="successAlert">
+                  {{ successAlert }}
+                </div>
+                <ul class="p-0" v-if="hasErrors">
+                  <li
+                    class="list-unstyled"
+                    v-for="(error, key) in errors"
+                    :key="key"
+                  >
+                    {{ error }}
+                  </li>
+                </ul>
               </div>
-              <button class="form-button">Invia</button>
+              <div>
+                <div class="form-group">
+                  <label for="email">La tua email</label>
+                  <input
+                    type="email"
+                    class="form-control shadow"
+                    :class="{ 'is-invalid': errors.email }"
+                    id="email"
+                    placeholder="name@example.com"
+                    v-model.trim="form.email"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="description">Descrivi la tua richiesta</label>
+                  <textarea
+                    class="form-control shadow"
+                    :class="{ 'is-invalid': errors.request }"
+                    id="request"
+                    rows="3"
+                    v-model.trim="form.request"
+                  ></textarea>
+                </div>
+                <button class="form-button" @click="sendQuote()">
+                  <span v-if="!isLoading">Invia</span>
+                  <span
+                    v-else
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -44,7 +79,67 @@
 </template>
 
 <script>
-export default {};
+import { isEmpty } from "lodash";
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        request: "",
+        user_id: 1,
+      },
+      errors: {},
+      isLoading: false,
+      successAlert: null,
+      match:
+        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    };
+  },
+  methods: {
+    validateForm() {
+      this.successAlert = "";
+      const errors = {};
+      if (!this.form.email) errors.email = "La Mail è obbligatoria";
+      if (!this.form.request)
+        errors.request = "Il testo del messaggio è obbligatorio";
+
+      if (this.form.email && !this.form.email.match(this.match)) {
+        errors.email = "La mail non è valida";
+      }
+
+      this.isLoading = false;
+      this.errors = errors;
+    },
+
+    sendQuote() {
+      this.validateForm();
+
+      if (!this.hasErrors) {
+        this.isLoading = true;
+        axios
+          .post("http://127.0.0.1:8000/api/quote", this.form)
+          .then((res) => {
+            this.form.email = "";
+            this.form.request = "";
+            this.successAlert = "Preventivo inviato con successo";
+          })
+          .catch((err) => {
+            console.error(err);
+            this.errors = { error: "Si è verificato un errore" };
+          })
+          .then(() => {
+            this.isLoading = false;
+            console.log("chiamata terminata");
+          });
+      }
+    },
+  },
+  computed: {
+    hasErrors() {
+      return !isEmpty(this.errors);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -52,7 +147,6 @@ body {
   height: 100vh;
   background-image: url(https://soak.co/wp-content/uploads/2019/01/blue-background.jpg);
   background-size: cover;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   .admin {
     position: absolute;
     top: 10px;
@@ -62,9 +156,6 @@ body {
     background-color: #293a4e;
     label {
       font-size: 1.1rem;
-    }
-    .form-control {
-      border-color: rgb(26, 14, 14);
     }
     .form-button {
       background-color: #03a9f4;

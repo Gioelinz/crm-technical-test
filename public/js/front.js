@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1953,7 +1955,99 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: {
+        email: "",
+        request: "",
+        user_id: 1
+      },
+      errors: {},
+      isLoading: false,
+      successAlert: null,
+      match: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    };
+  },
+  methods: {
+    validateForm: function validateForm() {
+      this.successAlert = "";
+      var errors = {};
+      if (!this.form.email) errors.email = "La Mail è obbligatoria";
+      if (!this.form.request) errors.request = "Il testo del messaggio è obbligatorio";
+
+      if (this.form.email && !this.form.email.match(this.match)) {
+        errors.email = "La mail non è valida";
+      }
+
+      this.isLoading = false;
+      this.errors = errors;
+    },
+    sendQuote: function sendQuote() {
+      var _this = this;
+
+      this.validateForm();
+
+      if (!this.hasErrors) {
+        this.isLoading = true;
+        axios.post("http://127.0.0.1:8000/api/quote", this.form).then(function (res) {
+          _this.form.email = "";
+          _this.form.request = "";
+          _this.successAlert = "Preventivo inviato con successo";
+        })["catch"](function (err) {
+          console.error(err);
+          _this.errors = {
+            error: "Si è verificato un errore"
+          };
+        }).then(function () {
+          _this.isLoading = false;
+          console.log("chiamata terminata");
+        });
+      }
+    }
+  },
+  computed: {
+    hasErrors: function hasErrors() {
+      return !Object(lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"])(this.errors);
+    }
+  }
+});
 
 /***/ }),
 
@@ -6336,7 +6430,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "body {\n  height: 100vh;\n  background-image: url(https://soak.co/wp-content/uploads/2019/01/blue-background.jpg);\n  background-size: cover;\n  font-family: \"Segoe UI\", Tahoma, Geneva, Verdana, sans-serif;\n}\nbody .admin {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\nbody .card {\n  background-color: #293a4e;\n}\nbody .card label {\n  font-size: 1.1rem;\n}\nbody .card .form-control {\n  border-color: rgb(26, 14, 14);\n}\nbody .card .form-button {\n  background-color: #03a9f4;\n  font-size: 1.1rem;\n  border: 0;\n  border-radius: 50px;\n  padding: 8px 22px;\n  transition: all 0.4s;\n}\nbody .card .form-button:hover {\n  background-color: rgb(14, 4, 106);\n  color: white;\n  /* transform: scale(1.2); */\n  -webkit-animation: pulsate 0.5s ease-in-out 2 both;\n          animation: pulsate 0.5s ease-in-out 2 both;\n}\n\n/* Animazione bottone */\n@-webkit-keyframes pulsate {\n0% {\n    transform: scale(1);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes pulsate {\n0% {\n    transform: scale(1);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n/* Testo My agency */\n.content {\n  position: relative;\n}\n.content h2 {\n  color: #fff;\n  font-size: 8em;\n  bottom: 100%;\n  right: 20%;\n  position: absolute;\n}\n.content h2:nth-child(1) {\n  color: transparent;\n  -webkit-text-stroke: 2px #03a9f4;\n}\n.content h2:nth-child(2) {\n  color: #03a9f4;\n  -webkit-animation: animate 4s ease-in-out infinite;\n          animation: animate 4s ease-in-out infinite;\n}\n@-webkit-keyframes animate {\n0%, 100% {\n    -webkit-clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n}\n50% {\n    -webkit-clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n}\n}\n@keyframes animate {\n0%, 100% {\n    -webkit-clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n}\n50% {\n    -webkit-clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n}\n}", ""]);
+exports.push([module.i, "body {\n  height: 100vh;\n  background-image: url(https://soak.co/wp-content/uploads/2019/01/blue-background.jpg);\n  background-size: cover;\n}\nbody .admin {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\nbody .card {\n  background-color: #293a4e;\n}\nbody .card label {\n  font-size: 1.1rem;\n}\nbody .card .form-button {\n  background-color: #03a9f4;\n  font-size: 1.1rem;\n  border: 0;\n  border-radius: 50px;\n  padding: 8px 22px;\n  transition: all 0.4s;\n}\nbody .card .form-button:hover {\n  background-color: rgb(14, 4, 106);\n  color: white;\n  /* transform: scale(1.2); */\n  -webkit-animation: pulsate 0.5s ease-in-out 2 both;\n          animation: pulsate 0.5s ease-in-out 2 both;\n}\n\n/* Animazione bottone */\n@-webkit-keyframes pulsate {\n0% {\n    transform: scale(1);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes pulsate {\n0% {\n    transform: scale(1);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n/* Testo My agency */\n.content {\n  position: relative;\n}\n.content h2 {\n  color: #fff;\n  font-size: 8em;\n  bottom: 100%;\n  right: 20%;\n  position: absolute;\n}\n.content h2:nth-child(1) {\n  color: transparent;\n  -webkit-text-stroke: 2px #03a9f4;\n}\n.content h2:nth-child(2) {\n  color: #03a9f4;\n  -webkit-animation: animate 4s ease-in-out infinite;\n          animation: animate 4s ease-in-out infinite;\n}\n@-webkit-keyframes animate {\n0%, 100% {\n    -webkit-clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n}\n50% {\n    -webkit-clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n}\n}\n@keyframes animate {\n0%, 100% {\n    -webkit-clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);\n}\n50% {\n    -webkit-clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n            clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);\n}\n}", ""]);
 
 // exports
 
@@ -38188,56 +38282,102 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "h-100" }, [
+  return _c("section", { staticClass: "h-100" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "container h-100" }, [
       _c(
-        "a",
-        {
-          staticClass: "text-decoration-none admin",
-          attrs: { href: "/admin" },
-        },
-        [_c("i", { staticClass: "fa-solid fa-user fa-2x" })]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "container h-100" }, [
-        _c(
-          "div",
-          {
-            staticClass: "row justify-content-center align-items-center h-100",
-          },
-          [
-            _c("div", { staticClass: "col-md-10" }, [
-              _c("div", { staticClass: "card shadow text-white" }, [
-                _c("div", { staticClass: "content" }, [
-                  _c("h2", [_vm._v("My Agency")]),
-                  _vm._v(" "),
-                  _c("h2", [_vm._v("My Agency")]),
-                ]),
+        "div",
+        { staticClass: "row justify-content-center align-items-center h-100" },
+        [
+          _c("div", { staticClass: "col-md-10" }, [
+            _c("div", { staticClass: "card shadow text-white" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.hasErrors || _vm.successAlert
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert text-center my-3 mx-auto",
+                        class: _vm.hasErrors ? "alert-danger" : "alert-success",
+                        attrs: { role: "alert" },
+                      },
+                      [
+                        _vm.successAlert
+                          ? _c("div", [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(_vm.successAlert) +
+                                  "\n              "
+                              ),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.hasErrors
+                          ? _c(
+                              "ul",
+                              { staticClass: "p-0" },
+                              _vm._l(_vm.errors, function (error, key) {
+                                return _c(
+                                  "li",
+                                  { key: key, staticClass: "list-unstyled" },
+                                  [
+                                    _vm._v(
+                                      "\n                  " +
+                                        _vm._s(error) +
+                                        "\n                "
+                                    ),
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                      ]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h4", { staticClass: "mb-0" }, [
-                    _vm._v("Chiedi qui il tuo preventivo"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
+                _c("div", [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "email" } }, [
                       _vm._v("La tua email"),
                     ]),
                     _vm._v(" "),
                     _c("input", {
-                      staticClass: "form-control",
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.form.email,
+                          expression: "form.email",
+                          modifiers: { trim: true },
+                        },
+                      ],
+                      staticClass: "form-control shadow",
+                      class: { "is-invalid": _vm.errors.email },
                       attrs: {
                         type: "email",
                         id: "email",
                         placeholder: "name@example.com",
+                      },
+                      domProps: { value: _vm.form.email },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "email",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function ($event) {
+                          return _vm.$forceUpdate()
+                        },
                       },
                     }),
                   ]),
@@ -38248,19 +38388,93 @@ var staticRenderFns = [
                     ]),
                     _vm._v(" "),
                     _c("textarea", {
-                      staticClass: "form-control",
-                      attrs: { id: "description", rows: "3" },
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.form.request,
+                          expression: "form.request",
+                          modifiers: { trim: true },
+                        },
+                      ],
+                      staticClass: "form-control shadow",
+                      class: { "is-invalid": _vm.errors.request },
+                      attrs: { id: "request", rows: "3" },
+                      domProps: { value: _vm.form.request },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.form,
+                            "request",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function ($event) {
+                          return _vm.$forceUpdate()
+                        },
+                      },
                     }),
                   ]),
                   _vm._v(" "),
-                  _c("button", { staticClass: "form-button" }, [
-                    _vm._v("Invia"),
-                  ]),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "form-button",
+                      on: {
+                        click: function ($event) {
+                          return _vm.sendQuote()
+                        },
+                      },
+                    },
+                    [
+                      !_vm.isLoading
+                        ? _c("span", [_vm._v("Invia")])
+                        : _c("span", {
+                            staticClass: "spinner-border spinner-border-sm",
+                            attrs: { role: "status", "aria-hidden": "true" },
+                          }),
+                    ]
+                  ),
                 ]),
               ]),
             ]),
-          ]
-        ),
+          ]),
+        ]
+      ),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      { staticClass: "text-decoration-none admin", attrs: { href: "/admin" } },
+      [_c("i", { staticClass: "fa-solid fa-user fa-2x" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("h2", [_vm._v("My Agency")]),
+      _vm._v(" "),
+      _c("h2", [_vm._v("My Agency")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", { staticClass: "mb-0" }, [
+        _vm._v("Chiedi qui il tuo preventivo"),
       ]),
     ])
   },

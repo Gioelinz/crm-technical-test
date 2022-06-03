@@ -56,7 +56,7 @@
                         <div class="input-group-text"><i class="fa-solid fa-phone"></i></div>
                     </div>
                     <input type="tel" class="form-control @error('telephone') is-invalid @enderror" id="telephone"
-                        name="telephone" pattern="[0-9]{3}-[0-9]{3}[0-9]{4}" placeholder="333-12345678" required
+                        name="telephone" pattern="[0-9]{3}-[0-9]{3}[0-9]{4}" placeholder="333-12345678"
                         value="{{ old('telephone', $customer->telephone) }}">
                     @error('telephone')
                         <div class="invalid-feedback">
@@ -101,6 +101,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Conferma</button>
+        <a class="btn btn-primary" href="{{ url()->previous() }}">Torna indietro</a>
         </form>
     </div>
 @endsection

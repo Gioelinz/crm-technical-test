@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="container">
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
+        @include('includes.session-message')
         <div class="d-flex justify-content-end mb-2">
             <a class="btn btn-success" href="{{ route('admin.customers.create') }}">Nuovo cliente</a>
         </div>

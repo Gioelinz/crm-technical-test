@@ -27,9 +27,14 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $customer = new Customer();
+        if ($request->all()) {
+            $customer->email = $request->email;
+        };
+
+
         $tags = Tag::all();
         return view('admin.customers.create', compact('customer', 'tags'));
     }

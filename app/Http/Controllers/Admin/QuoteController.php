@@ -77,11 +77,13 @@ class QuoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Quote $quote
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Quote $quote)
     {
-        //
+        $quote->delete();
+
+        return redirect()->route('admin.quotes.index')->with('message', "Preventivo eliminato con successo");
     }
 }

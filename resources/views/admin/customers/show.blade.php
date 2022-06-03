@@ -3,11 +3,7 @@
 @section('content')
     <div class="container">
 
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
+        @include('includes.session-message')
 
         <a href="{{ route('admin.customers.index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-arrow-left"></i>
             Torna
